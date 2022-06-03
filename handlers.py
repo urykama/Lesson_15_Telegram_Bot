@@ -1,6 +1,5 @@
 import pprint
-
-from main import bot, dp
+from main import bot, dp, hh
 from aiogram.types import Message
 from config import admin_id
 
@@ -32,24 +31,30 @@ async def echo(message: Message):
     await bot.send_message(chat_id=message.from_user.id, text=text)
 
 
+@dp.message_handler(commands='hh')
+async def echo(message: Message):
+    '''
+    - /help - помощь по командам и описание системы
+    :param message:
+    :return:
+    '''
 
+    await bot.send_message(chat_id=message.from_user.id, text='вывод настроек')
+    print('вывод настроек')
+    text = str(hh)
+    await bot.send_message(chat_id=message.from_user.id, text=text)
 
-# @bot.message_handler(commands=['start', 'help'])
-# async def send_welcome(message):
-#     await bot.reply_to(message, "Howdy, how are you doing?")
+@dp.message_handler(commands='search')
+async def echo(message: Message):
+    '''
+    - /help - помощь по командам и описание системы
+    :param message:
+    :return:
+    '''
+    await bot.send_message(chat_id=message.from_user.id, text='Идёт поиск: пожалуйста подождите...')
+    print('запущен поиск')
+    print(hh.search())
+    text = str(hh.search())
+    await bot.send_message(chat_id=message.from_user.id, text=text)
 
-# <Message
-#   {"message_id": 60,
-#     "from":{
-#       "id": 1001129070,
-#         "is_bot": false,
-#         "first_name": "Ural",
-#         "last_name": "Kamaletdinov",
-#         "username": "Ural_Kama_AD",
-#         "language_code": "ru"
-#     },
-#           "chat": {"id": 1001129070, "first_name": "Ural", "last_name": "Kamaletdinov", "username": "Ural_Kama_AD", "type": "private"},
-#           "date": 1654198648,
-#           "text": "/start",
-#           "entities": [{"type": "bot_command", "offset": 0, "length": 6}]}>
 
